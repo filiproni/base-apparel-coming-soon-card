@@ -1,41 +1,43 @@
-// - Receive an error message when the `form` is submitted if:
-// - The `input` field is empty
-// - The email address is not formatted correctly
-
-// creates form
+// Creates form
 const textContainer = document.querySelector(".text-container");
 const emailContainer = document.createElement("div");
-emailContainer.classList.add("email-input");
 const emailForm = document.createElement("form");
-emailContainer.append(emailForm);
 const footer = document.querySelector("footer");
 
+emailContainer.classList.add("email-input");
+emailContainer.append(emailForm);
+
 emailForm.innerHTML = `
-    <input type="email" name="email" placeholder="Email Address">
+    <input type="email" name="email" placeholder="Email Address" required>
     <button id="email-btn" type="submit"><img src="images/icon-arrow.svg"></button>`;
 
 textContainer.insertBefore(emailContainer, footer);
+const emailFormButton = emailForm.querySelector("button");
 
-// emailForm.addEventListener("submit", (e) => {
-// 	e.preventDefault();
-// 	let userEmailInput = emailForm.querySelector("input").value;
-// 	userEmailInput == ""
-// 		? console.log("ERROR")
-// 		: `<p style="color: red; font-size: 48px;">INPUT WAS SUCCESSFUL!</p>`;
-// });
-
-// divs are placed into an array so that the created form can be inserted into html
-// const divs = document.querySelectorAll(".text-container div");
-// let divArray = [];
-
-// function makeDivArray(allDivs) {
-// 	for (let i = 0; i < divs.length; i++) {
-// 		divArray.push(divs[i]);
-// 	}
-// }
-// makeDivArray(divs);
-// divArray.push(emailContainer);
-// console.log(divArray);
-
-
-
+/*TODO:
+1. Error msg should DISAPPEAR once user puts in a valid email
+2. User should be able to click on field if email was invalid
+3. Msgs should only display ONCE bc you can only submit ONCE 
+4. NEED TO USE SWITCH STATEMENTS */
+emailFormButton.addEventListener("click", (e) => {
+	e.preventDefault();
+	const userEmailInput = emailForm.querySelector("input").value;
+	const invalidFormat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+	// Checks if email input field is empty
+	// Checks if email address is formatted correctly
+	if (
+		userEmailInput.length == 0 ||
+		invalidFormat.test(userEmailInput) == false
+	) {
+		const errorMsgContainer = document.createElement("div");
+		emailForm.classList.add("invalid-input");
+		errorMsgContainer.classList.add("error-msg");
+		errorMsgContainer.innerText = "Please enter an email address.";
+		textContainer.insertBefore(errorMsgContainer, footer);
+	} else {
+		const successfulMsgContainer = document.createElement("div");
+		successfulMsgContainer.classList.add("successful-msg");
+		successfulMsgContainer.innerText = "Email is valid!";
+		textContainer.insertBefore(successfulMsgContainer, footer);
+	}
+});
