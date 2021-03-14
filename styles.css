@@ -66,7 +66,7 @@ body {
 	display: inline-block;
 }
 
-.email-input input {
+.email-input input[type="email"] {
 	background: transparent;
 	padding: 15px 150px 15px 25px;
 	border: 0.1px solid rgba(131, 131, 131, 0.4);
@@ -86,13 +86,6 @@ body {
 	border: 0.1px solid hsl(0, 36%, 70%);
 	border-radius: 50px;
 	outline: none; /* removes default blue border */
-}
-
-.invalid-input input:invalid {
-	border: 1px solid red;
-	background-image: url("images/icon-error.svg");
-	background-repeat: no-repeat;
-	background-position: 80%;
 }
 
 #email-btn {
@@ -131,14 +124,23 @@ footer p.attribution {
 	text-decoration: underline;
 }
 
-.error-msg {
+.invalid-input input:invalid {
+	border: 1px solid red;
+	background-image: url("images/icon-error.svg");
+	background-repeat: no-repeat;
+	background-position: 80%;
+}
+
+#error-msg {
+	display: none;
 	color: rgba(255, 0, 0, 0.8);
 	font-weight: normal;
 	font-size: 13px;
 	padding: 10px 0 0 140px;
 }
 
-.successful-msg {
+#successful-msg {
+	display: none;
 	color: green;
 	font-weight: normal;
 	font-size: 13px;
