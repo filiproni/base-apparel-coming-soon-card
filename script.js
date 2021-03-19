@@ -10,14 +10,13 @@ emailContainer.append(emailForm);
 emailForm.innerHTML = `
     <input type="email" name="email" placeholder="Email Address" required>
 	<button id="email-btn" type="submit"><img src="images/icon-arrow.svg"></button>
-	<div id="error-msg">Please enter a valid email address.</div>
-	<div id="successful-msg">Email was submitted!</div>`;
+	<div id="error-msg">Please enter a valid email address.</div>`;
 
 textContainer.insertBefore(emailContainer, footer);
 const emailFormButton = emailForm.querySelector("button");
 const userEmailInput = emailForm.querySelector("input");
 
-// Error message disappears when user types in the input field 
+// Error message disappears when user types in the input field
 userEmailInput.addEventListener("input", (e) => {
 	e.preventDefault();
 	emailForm.classList.remove("invalid-input");
@@ -39,7 +38,7 @@ const emailValidation = () => {
 		emailForm.classList.add("invalid-input");
 		emailForm.querySelector("#error-msg").style.display = "block";
 	} else {
-		emailForm.querySelector("#successful-msg").style.display = "block";
+		alert("Email was submitted successfully!");
 	}
 };
 
@@ -47,3 +46,4 @@ emailFormButton.addEventListener("click", (e) => {
 	e.preventDefault();
 	emailValidation();
 });
+
